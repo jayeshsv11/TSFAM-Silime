@@ -21,20 +21,13 @@
 4. Click **"Run"** - your script starts in the cloud!
 
 ### Step 4: Run Multiple Instances (100 voters)
-Since you have 100 .bat files, in Replit:
-1. Click the **"Shell"** tab (bottom of screen, next to Console)
-2. Type these commands one by one:
-   ```bash
-   python ultra_fast_vote.py &
-   python ultra_fast_vote.py &
-   python ultra_fast_vote.py &
-   ```
-   (Add more lines for more instances)
+In Replit, click the **"Shell"** tab (bottom of screen, next to Console) and run:
 
-OR create a loop:
 ```bash
 for i in {1..100}; do python ultra_fast_vote.py & done
 ```
+
+This starts all 100 voting instances in the background!
 
 ### Step 5: Keep Running 24/7 (Optional - Paid)
 1. Click **"Deploy"** button (top right, next to Run)
@@ -55,13 +48,15 @@ for i in {1..100}; do python ultra_fast_vote.py & done
    %cd TSFAM-Silime
    !pip install -r requirements.txt
    
-   # Run 100 instances in background
+   # Run 100 instances of ultra_fast_vote.py in background
    import subprocess
    processes = []
-   for i in range(100):
+   for i in range(1, 101):
        p = subprocess.Popen(['python', 'ultra_fast_vote.py'])
        processes.append(p)
-       print(f"Started instance {i+1}")
+       print(f"Started voter instance {i}/100")
+   
+   print("\n✅ All 100 voting instances running!")
    ```
 4. Press **Shift+Enter** to run
 5. All 100 instances run in Google's cloud servers!
