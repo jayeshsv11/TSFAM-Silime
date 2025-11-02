@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote Data Clearer - Blizzard Production House</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        .button {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        .button:hover {
+            background: #45a049;
+        }
+        .button.danger {
+            background: #f44336;
+        }
+        .button.danger:hover {
+            background: #da190b;
+        }
+        .button.primary {
+            background: #2196F3;
+        }
+        .button.primary:hover {
+            background: #0b7dda;
+        }
+        .info-box {
+            background: #e7f3fe;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .step {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        .step h3 {
+            margin-top: 0;
+            color: #4CAF50;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        ul {
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🗳️ Blizzard Production House - Vote Helper</h1>
+        
+        <div class="info-box">
+            <strong>Purpose:</strong> This tool helps you vote for <strong>Ashutosh Pratap Singh</strong> by clearing cached voting data.
+        </div>
+
+        <div class="warning-box">
+            <strong>⚠️ Important:</strong> The website tracks votes using multiple methods:
+            <ul>
+                <li><strong>Cookies</strong> - Stored in your browser</li>
+                <li><strong>Local Storage</strong> - Browser storage</li>
+                <li><strong>Session Storage</strong> - Temporary browser storage</li>
+                <li><strong>IP Address</strong> - Your network identifier (cannot be cleared)</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3>Step 1: Clear Vote Data</h3>
+            <p>Click the button below to clear all voting-related cookies and storage:</p>
+            <button class="button danger" onclick="clearVoteData()">🗑️ Clear All Vote Data</button>
+            <p id="clearStatus"></p>
+        </div>
+
+        <div class="step">
+            <h3>Step 2: Open Voting Page</h3>
+            <p>After clearing the data, open the voting page in a new tab:</p>
+            <button class="button primary" onclick="openVotingPage()">🔗 Open Voting Page</button>
+        </div>
+
+        <div class="step">
+            <h3>Step 3: Vote for Ashutosh Pratap Singh</h3>
+            <p>On the voting page:</p>
+            <ol>
+                <li>Look for <strong>"Ashutosh Pratap Singh"</strong> in the list</li>
+                <li>Click on his name/radio button</li>
+                <li>Click the Submit/Vote button</li>
+            </ol>
+        </div>
+
+        <div class="success-box">
+            <h3>✨ For Multiple Votes (Advanced)</h3>
+            <p>To vote multiple times, you need to:</p>
+            <ul>
+                <li><strong>Change your IP address</strong> (use VPN, mobile data, or different network)</li>
+                <li><strong>Use different browsers</strong> (Chrome, Firefox, Edge, Opera)</li>
+                <li><strong>Use incognito/private mode</strong> (each new window = fresh session)</li>
+                <li><strong>Clear data</strong> between each vote using this tool</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3>📋 Quick Actions</h3>
+            <button class="button" onclick="clearAndOpen()">🚀 Clear Data & Open Vote Page</button>
+            <button class="button" onclick="showInstructions()">📖 Show DevTools Instructions</button>
+        </div>
+
+        <div id="devToolsInstructions" style="display:none;" class="info-box">
+            <h3>Manual Method (Using Browser DevTools):</h3>
+            <ol>
+                <li>Press <code>F12</code> to open DevTools</li>
+                <li>Go to <strong>Application</strong> tab (Chrome) or <strong>Storage</strong> tab (Firefox)</li>
+                <li>Clear:
+                    <ul>
+                        <li>Cookies → Select all → Delete</li>
+                        <li>Local Storage → Right click → Clear</li>
+                        <li>Session Storage → Right click → Clear</li>
+                    </ul>
+                </li>
+                <li>Close DevTools and refresh the page</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        const votingURL = 'https://blizzardproductionhouse.com/tech/';
+
+        function clearVoteData() {
+            // Clear cookies
+            document.cookie.split(";").forEach((c) => {
+                document.cookie = c
+                    .replace(/^ +/, "")
+                    .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+            });
+
+            // Clear localStorage
+            localStorage.clear();
+
+            // Clear sessionStorage
+            sessionStorage.clear();
+
+            // Show success message
+            const status = document.getElementById('clearStatus');
+            status.innerHTML = '<strong style="color: green;">✓ Successfully cleared:</strong><br>' +
+                              '• All cookies<br>' +
+                              '• Local storage<br>' +
+                              '• Session storage<br>' +
+                              '<em>Note: IP address tracking cannot be cleared from browser.</em>';
+            
+            console.log('Vote data cleared successfully!');
+        }
+
+        function openVotingPage() {
+            window.open(votingURL, '_blank');
+        }
+
+        function clearAndOpen() {
+            clearVoteData();
+            setTimeout(() => {
+                openVotingPage();
+            }, 1000);
+        }
+
+        function showInstructions() {
+            const instructions = document.getElementById('devToolsInstructions');
+            instructions.style.display = instructions.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Log current storage status
+        console.log('=== Current Storage Status ===');
+        console.log('Cookies:', document.cookie);
+        console.log('LocalStorage items:', localStorage.length);
+        console.log('SessionStorage items:', sessionStorage.length);
+    </script>
+</body>
+</html>
