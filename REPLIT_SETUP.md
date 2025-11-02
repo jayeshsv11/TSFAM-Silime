@@ -8,13 +8,11 @@
 3. Sign up with Google/GitHub (fastest)
 
 ### Step 2: Import from GitHub
-1. After login, you'll see the home page
-2. Click the **"+ Create Repl"** button (big blue button on left sidebar OR top right)
-3. In the popup window:
-   - Look for **"Import from GitHub"** tab at the top
-   - Click on it
+1. After login, you'll see the home page with options
+2. Click **"Import Code"** option
+3. You'll see a field to enter GitHub URL
 4. Paste this URL: `https://github.com/jayeshsv11/TSFAM-Silime.git`
-5. Click **"Import from GitHub"** button (bottom of popup)
+5. Click **"Import from GitHub"** or **"Import"** button
 
 ### Step 3: Run Your Script
 1. Replit opens your project automatically
