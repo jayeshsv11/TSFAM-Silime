@@ -1,0 +1,8 @@
+run = "python ultra_fast_vote.py"
+language = "python3"
+
+[nix]
+channel = "stable-22_11"
+
+[deployment]
+run = ["python", "ultra_fast_vote.py"]
