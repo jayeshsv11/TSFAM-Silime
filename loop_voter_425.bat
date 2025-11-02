@@ -1,0 +1,5 @@
+@echo off
+title Voter Instance 425
+echo Starting Voter Instance 425...
+python ultra_fast_vote.py
+pause
