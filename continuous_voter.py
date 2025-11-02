@@ -26,32 +26,41 @@ class ContinuousVoter:
         options.add_experimental_option("excludeSwitches", ["enable-automation"])
         options.add_argument('--disable-logging')
         options.add_argument('--log-level=3')
-        options.add_argument('--disable-extensions')
-        options.add_argument('--disable-images')  # Faster loading
         
         driver = webdriver.Chrome(options=options)
         
         try:
-            driver.set_page_load_timeout(8)
+            driver.execute_cdp_cmd('Page.addScriptToEvaluateOnNewDocument', {
+                'source': 'Object.defineProperty(navigator, "webdriver", {get: () => undefined})'
+            })
+            
+            driver.set_page_load_timeout(10)
             driver.get(self.url)
-            time.sleep(1.2)  # Minimal wait
+            time.sleep(3)  # Wait for page to load
             
             # Find and click Ashutosh option
             labels = driver.find_elements(By.TAG_NAME, 'label')
+            found = False
             for label in labels:
-                if 'ashutosh' in label.text.lower() and 'pratap' in label.text.lower():
-                    driver.execute_script("arguments[0].click();", label)
+                if 'ashutosh' in label.text.lower() and 'pratap' in label.text.lower() and 'singh' in label.text.lower():
+                    label.click()
+                    found = True
+                    time.sleep(0.5)
                     break
             
-            time.sleep(0.2)
+            if not found:
+                return False
             
             # Submit
-            submit = driver.find_element(By.CSS_SELECTOR, 'button[type="submit"]')
-            driver.execute_script("arguments[0].click();", submit)
-            time.sleep(1.5)
-            
-            success = 'thank' in driver.page_source.lower() or 'success' in driver.page_source.lower()
-            return success
+            submit_buttons = driver.find_elements(By.CSS_SELECTOR, 'button[type="submit"], input[type="submit"], .forminator-button-submit')
+            if submit_buttons:
+                submit_buttons[0].click()
+                time.sleep(3)
+                
+                success = 'thank' in driver.page_source.lower() or 'success' in driver.page_source.lower()
+                return success
+            else:
+                return False
                 
         except Exception as e:
             return False

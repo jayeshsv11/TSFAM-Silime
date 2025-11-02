@@ -1,8 +1,13 @@
 @echo off
+cd /d "%~dp0"
 title VOTER #2
 color 0B
+cls
 echo ========================================
-echo CONTINUOUS VOTER - TERMINAL 2
+echo VOTER #2 - Ashutosh Pratap Singh
 echo ========================================
-python continuous_voter.py
+echo.
+python simple_continuous.py
 pause
+
+
